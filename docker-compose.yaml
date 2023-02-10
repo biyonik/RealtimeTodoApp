@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  # NestJS Todo Api
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./todo-api
+      # Only build development stage from our dockerfile
+      target: development
+    volumes:
+      - ./api:/ahmet/src/app
+      - /ahmet/src/app/node_modules
+    # dev mode: npm run start:dev / debug: npm run start:debug
+    command: npm run start:dev
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/db
+      JWT_SECRET: V{H9@"Dk)7tM>vPg~DG'TUWji&HjPEYU>w([~`j^H)g:UNmdu3`y%<^l(q[{nCW
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:15.1
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - 35000:5432
+
+  postgres_admin:
+    image: dpage/pgadmin4:6.12
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5050:80
