@@ -1,14 +1,15 @@
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-export interface Test {
-    title: string;
-}
+import { User } from '../entities/user.entity';
+import { Repository } from "typeorm";
+import { AuthService } from "../../auth/services/auth.service";
+import { UserInterface } from "../user.interface";
 export declare class UserService {
-    create(createUserDto: CreateUserDto): string;
-    findAll(): string;
-    findOne(id: number): {
-        title: string;
-    };
-    update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    private readonly userRepository;
+    private authService;
+    constructor(userRepository: Repository<User>, authService: AuthService);
+    create(newUser: UserInterface): Promise<UserInterface>;
+    login(user: UserInterface): Promise<string>;
+    private findByEmail;
+    private findOne;
+    private mailExists;
+    private usernameExists;
 }

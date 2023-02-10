@@ -8,6 +8,7 @@ COPY package*.json ./
 COPY tsconfig.build.json ./
 COPY tsconfig.json ./
 
+
 RUN npm ci
 RUN npm run build
 
