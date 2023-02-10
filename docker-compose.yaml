@@ -1,6 +1,21 @@
 version: "3.8"
 
 services:
+  # Angular Frontend
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./client-ui
+      target: development
+    command: npm run start
+    volumes:
+      - ./client-ui:/ahmet/client-ui/src/app
+      - /ahmet/client-ui/src/app/node_modules
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+
   # NestJS Todo Api
   api:
     build:
