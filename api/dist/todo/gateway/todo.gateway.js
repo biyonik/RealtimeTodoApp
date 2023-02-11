@@ -21,7 +21,8 @@ let TodoGateway = class TodoGateway {
     }
     async handleConnection(socket) {
         try {
-            const decodedToken = await this.authService.verifyJwt(socket.handshake.headers.authorization);
+            console.log('Authorization:: => ', socket.handshake.auth.Authorization);
+            const decodedToken = await this.authService.verifyJwt(socket.handshake.auth.Authorization);
             const user = await this.userService.getOneById(decodedToken.user.id);
             if (!user) {
                 console.log('Disconnect user because user not found!');
@@ -43,7 +44,10 @@ let TodoGateway = class TodoGateway {
 };
 TodoGateway = __decorate([
     (0, websockets_1.WebSocketGateway)({
-        namespace: 'todos'
+        namespace: 'todos',
+        cors: {
+            origin: ['http://localhost:3000', 'http://localhost:4200']
+        }
     }),
     __metadata("design:paramtypes", [user_service_1.UserService,
         auth_service_1.AuthService])

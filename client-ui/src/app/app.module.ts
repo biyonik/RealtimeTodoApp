@@ -5,6 +5,13 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { JwtModule } from '@auth0/angular-jwt';
+
+export const LOCALSTORAGE_KEY_NESTJS_TODO_APP = 'todo_app_token';
+
+export function tokenGetter() {
+  return localStorage.getItem(LOCALSTORAGE_KEY_NESTJS_TODO_APP);
+}
 
 @NgModule({
   declarations: [
@@ -15,7 +22,13 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000']
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
