@@ -4,6 +4,7 @@ import { UserController } from './controllers/user.controller';
 import {AuthModule} from "../auth/auth.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "./entities/user.entity";
+import {DtoHelperService} from "./dto/dto-helper.service";
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import {User} from "./entities/user.entity";
       TypeOrmModule.forFeature([User])
   ],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService, DtoHelperService]
 })
 export class UserModule {}

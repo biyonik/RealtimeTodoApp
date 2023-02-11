@@ -16,12 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "compilerOptions": {
-      "experimentalDecorators": true,
-      "moduleResolution": "node",
-      "noImplicitAny": true,
-      "target": "es6"
-    }
+    "noFallthroughCasesInSwitch": false
+//    "compilerOptions": {
+//      "experimentalDecorators": true,
+//      "moduleResolution": "node",
+//      "noImplicitAny": true,
+//      "target": "es6"
+//    }
   }
 }

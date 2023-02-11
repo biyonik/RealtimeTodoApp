@@ -19,9 +19,11 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: configService.get('JWT_SECRET')
+            secretOrKey: configService.get('JWT_SECRET') || process.env.JWT_SECRET
         });
         this.configService = configService;
+        console.log('configService: ', this.configService.get('JWT_SECRET'));
+        console.log('process.env: ', process.env.JWT_SECRET);
     }
     async validate(payload) {
         return Object.assign({}, payload.user);

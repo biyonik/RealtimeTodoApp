@@ -8,7 +8,7 @@ export class AuthService {
     constructor(private jwtService: JwtService) {}
 
     async generateJwt(user: UserInterface): Promise<string> {
-        return this.jwtService.signAsync({user});
+        return this.jwtService.signAsync({user},{secret:process.env.JWT_SECRET});
     }
 
     async hashPassword(password: string): Promise<string> {
