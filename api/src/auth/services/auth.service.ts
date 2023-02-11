@@ -20,6 +20,6 @@ export class AuthService {
     }
 
     async verifyJwt(jwt: string): Promise<any> {
-        return this.jwtService.verifyAsync(jwt);
+        return this.jwtService.verifyAsync(jwt, {secret: process.env.JWT_SECRET});
     }
 }

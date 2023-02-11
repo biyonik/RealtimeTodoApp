@@ -8,6 +8,7 @@ export declare class UserService {
     constructor(userRepository: Repository<User>, authService: AuthService);
     create(newUser: UserInterface): Promise<UserInterface>;
     login(user: UserInterface): Promise<string>;
+    getOneById(id: string): Promise<UserInterface>;
     private findByEmail;
     private findOne;
     private mailExists;

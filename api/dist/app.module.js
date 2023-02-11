@@ -13,7 +13,19 @@ const auth_module_1 = require("./auth/auth.module");
 const todo_module_1 = require("./todo/todo.module");
 const user_module_1 = require("./user/user.module");
 const typeorm_1 = require("@nestjs/typeorm");
+const auth_middleware_1 = require("./auth.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(auth_middleware_1.AuthMiddleware)
+            .exclude({
+            path: '/users',
+            method: common_1.RequestMethod.POST
+        }, {
+            path: '/users/login',
+            method: common_1.RequestMethod.POST
+        }).forRoutes('');
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({

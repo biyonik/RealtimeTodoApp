@@ -27,7 +27,7 @@ let AuthService = class AuthService {
         return bcrypt.compare(password, storedPasswordHash);
     }
     async verifyJwt(jwt) {
-        return this.jwtService.verifyAsync(jwt);
+        return this.jwtService.verifyAsync(jwt, { secret: process.env.JWT_SECRET });
     }
 };
 AuthService = __decorate([
